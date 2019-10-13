@@ -8,11 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Optional;
 
 @Controller
 public class NoteController {
@@ -34,8 +33,13 @@ public class NoteController {
     }
 
     @GetMapping("/note")
-    public ModelAndView showListForm(Pageable pageable){
-        Page<Note> notes = noteService.findAll(pageable);
+    public ModelAndView showListForm(@RequestParam("title") Optional<String> title, Pageable pageable){
+        Page<Note> notes;
+        if (title.isPresent()){
+            notes= noteService.findAllByTitleContaining(title.get(),pageable);
+        }else {
+            notes=noteService.findAll(pageable);
+        }
         ModelAndView modelAndView = new ModelAndView("/note/list");
         modelAndView.addObject("notes", notes);
         return modelAndView;
