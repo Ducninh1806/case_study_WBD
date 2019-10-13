@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -42,6 +43,9 @@ import java.util.Properties;
 @EnableTransactionManagement
 @ComponentScan("com.ducninh.controller")
 @EnableJpaRepositories("com.ducninh.repository")
+@EnableSpringDataWebSupport
+
+
 public class ApplicationConfig extends WebMvcConfigurerAdapter implements ApplicationContextAware {
     @Autowired
     private ApplicationContext applicationContext;
