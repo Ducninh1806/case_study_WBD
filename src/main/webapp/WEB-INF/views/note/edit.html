@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Note</title>
+</head>
+<body>
+
+<h3>Edit Note</h3>
+
+<p><a href="/note">List Note</a> </p>
+
+
+    <form th:action="@{/edit-note}" th:object="${notes}" method="post">
+        <input type="hidden" th:field="*{id}" name="id">
+        <table>
+            <tr>
+                <td>Title</td>
+                <td><input type="text" th:field="*{title}"></td>
+            </tr>
+            <tr>
+                <td>Content</td>
+                <td><textarea th:rows="10" th:cols="50" th:field="*{content}"></textarea></td>
+            </tr>
+            <tr>
+                <td>TypeNote</td>
+                <td>
+                    <select name="typeNote">
+                        <option th:each="type:${typeNote}"
+                                th:value="${type.id}"
+                                th:text="${type.name}"
+                                th:selected="${type.id} == *{typeNote.id}" >
+
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Edit Note"> </td>
+            </tr>
+        </table>
+    </form>
+
+
+
+
+</body>
+</html>

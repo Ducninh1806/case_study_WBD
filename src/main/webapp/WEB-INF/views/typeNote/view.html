@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View TypeNote</title>
+</head>
+<body>
+<h1>View TypeNote: <span th:text="${typeNote.name}"></span></h1>
+<a href="/typeNote">List TypeNote</a>
+<table border="1">
+    <tr>
+        <th>Title</th>
+        <th>Content</th>
+    </tr>
+    <th:block th:each="n : ${note}">
+        <tr>
+            <td th:text="${n.title}"></td>
+            <td th:text="${n.content}"></td>
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>
